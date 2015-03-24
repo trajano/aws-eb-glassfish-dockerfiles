@@ -14,7 +14,7 @@ RUN         curl -L -o /tmp/glassfish-4.1.zip http://download.java.net/glassfish
             rm -f /tmp/glassfish-4.1.zip
             
 ADD         enable-secure-admin.sh /enable-secure-admin.sh
-RUN         chmod 755 /enable-secure-admin.sh
+RUN         /bin/bash /enable-secure-admin.sh
 
 # 8080 default web port
 # 4848 admin port
