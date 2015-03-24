@@ -12,7 +12,11 @@ RUN         curl -L -o /tmp/glassfish-4.1.zip http://download.java.net/glassfish
             unzip /tmp/glassfish-4.1.zip -d /usr/local && \
             rm -f /tmp/glassfish-4.1.zip
 
-EXPOSE      8080 4848 8181
+# 8080 default web port
+# 4848 admin port
+# 8181 default SSL port
+# 8009 debug port
+EXPOSE      8080 4848 8181 8009
 
 WORKDIR     /usr/local/glassfish4
 
