@@ -3,6 +3,7 @@ FROM        java:8-jdk
 ENV         JAVA_HOME         /usr/lib/jvm/java-8-openjdk-amd64
 ENV         GLASSFISH_HOME    /usr/local/glassfish4
 ENV         PATH              $PATH:$JAVA_HOME/bin:$GLASSFISH_HOME/bin
+ENV         AS_ADMIN_USERPASSWORD  **Random**
 
 RUN         apt-get update && \
             apt-get install -y curl unzip zip inotify-tools && \
@@ -11,6 +12,9 @@ RUN         apt-get update && \
 RUN         curl -L -o /tmp/glassfish-4.1.zip http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip && \
             unzip /tmp/glassfish-4.1.zip -d /usr/local && \
             rm -f /tmp/glassfish-4.1.zip
+            
+ADD         run.sh /run.sh
+RUN         chmod 755 /run.sh
 
 # 8080 default web port
 # 4848 admin port
@@ -21,4 +25,4 @@ EXPOSE      8080 4848 8181 8009
 WORKDIR     /usr/local/glassfish4
 
 # verbose causes the process to remain in the foreground so that docker can track it
-CMD         asadmin start-domain --verbose
+CMD         ["/run.sh"]
