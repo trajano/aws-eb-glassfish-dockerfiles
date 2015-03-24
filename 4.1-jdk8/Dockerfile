@@ -25,4 +25,4 @@ EXPOSE      8080 4848 8181 8009
 WORKDIR     /usr/local/glassfish4
 
 # verbose causes the process to remain in the foreground so that docker can track it
-CMD         ["/run.sh"]
+CMD ["asadmin", "start-domain", "--verbose=true"]
